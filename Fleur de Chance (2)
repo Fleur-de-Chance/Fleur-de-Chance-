@@ -1,0 +1,44 @@
+🌸 L&M – Fleur de Chance 🌸
+🎰 Générer 3 combinaisons
+
+Historique
+	•	
+
+function genererTirage() {
+    const nums = [];
+    while (nums.length < 5) {
+        let n = Math.floor(Math.random() * 50) + 1;
+        if (!nums.includes(n)) nums.push(n);
+    }
+    nums.sort((a, b) => a - b);
+
+    const etoiles = [];
+    while (etoiles.length < 2) {
+        let e = Math.floor(Math.random() * 12) + 1;
+        if (!etoiles.includes(e)) etoiles.push(e);
+    }
+    etoiles.sort((a, b) => a - b);
+
+    return { nums, etoiles };
+}
+
+function afficherTirage(tirage) {
+    return `Numéros : ${tirage.nums.join(', ')} | Étoiles : ${tirage.etoiles.join(', ')}`;
+}
+
+function genererTirages() {
+    const resultats = document.getElementById("resultats");
+    const historique = document.getElementById("historique");
+    resultats.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+        const tirage = genererTirage();
+        const texte = afficherTirage(tirage);
+        const div = document.createElement("div");
+        div.textContent = texte;
+        resultats.appendChild(div);
+
+        const li = document.createElement("li");
+        li.textContent = texte;
+        historique.appendChild(li);
+    }
+}
